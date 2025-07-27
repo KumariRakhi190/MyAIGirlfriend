@@ -1,0 +1,73 @@
+//
+//  AppDelegate.swift
+//  AIGirlFriend
+//
+//  Created by Rakhi on 19/07/23.
+//
+
+import UIKit
+import IQKeyboardManagerSwift
+import FirebaseCore
+import FirebaseFirestore
+import Mixpanel
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        KeyboardStateManager.shared.start()
+        IQKeyboardManager.shared.isEnabled = true
+        IQKeyboardManager.shared.resignOnTouchOutside = true
+        IQKeyboardManager.shared.disabledToolbarClasses = [EnterNameViewController.self, ChattingViewController.self]
+        IQKeyboardManager.shared.disabledDistanceHandlingClasses = [EnterNameViewController.self, ChattingViewController.self]
+        FirebaseApp.configure()
+        DatabaseManager.shared.reloadUser {_ in}
+        PublicAccess.shared.startObservingDateFromServer()
+        if let userDocumentId = iCloudStorage.shared.userDocumentId{
+            DatabaseManager.shared.getUser(documentId: userDocumentId, completion: { user in
+                iCloudStorage.shared.currentUser = user
+                if user != nil{
+                    DispatchQueue.main.async {
+                        if iCloudStorage.shared.currentUser?.isSubscribed == false{
+                            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaywallViewController")
+                            viewController.modalPresentationStyle = .fullScreen
+                            PublicAccess.shared.topViewController?.present(viewController, animated: true)
+                        }
+                    }
+                }
+            })
+        }
+        DatabaseManager.shared.reloadPromptsFromDatabase()
+        IAPHandler.shared.fetchAvailableProducts { products in
+            PublicAccess.shared.products = products
+        }
+        IAPHandler.shared.refreshReceipt()
+        IAPHandler.shared.refreshSubscription()
+        Mixpanel.initialize(token: Constants.mixPanelToken, trackAutomaticEvents: true)
+        Mixpanel.mainInstance().track(event: "App open")
+        DatabaseManager.shared.fetchTokens()
+        return true
+    }
+    
+    // MARK: UISceneSession Lifecycle
+    
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Called when a new scene session is being created.
+        // Use this method to select a configuration to create the new scene with.
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+    
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        // Called when the user discards a scene session.
+        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    
+}
+
