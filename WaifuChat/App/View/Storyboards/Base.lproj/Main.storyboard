@@ -362,6 +362,7 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="ky9-lL-Qvl" firstAttribute="top" secondItem="Pri-JY-gZJ" secondAttribute="top" constant="8" id="1FL-ol-EEj"/>
                                                     <constraint firstItem="iug-vT-UPs" firstAttribute="leading" secondItem="Pri-JY-gZJ" secondAttribute="leading" id="1gv-zI-Usu"/>
@@ -389,6 +390,7 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="ktT-Y1-Dj9" firstAttribute="leading" secondItem="8tU-LN-XFg" secondAttribute="leading" id="996-t9-ThS"/>
                                                     <constraint firstAttribute="trailing" secondItem="Kda-5y-QyD" secondAttribute="trailing" id="F7V-sQ-S1o"/>
@@ -416,6 +418,7 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="WQ3-dr-spp" firstAttribute="leading" secondItem="fHr-c0-Acc" secondAttribute="leading" id="1zu-cX-TFJ"/>
                                                     <constraint firstItem="WQ3-dr-spp" firstAttribute="top" secondItem="jtY-U8-664" secondAttribute="bottom" constant="3" id="DLg-fu-v0D"/>
@@ -444,6 +447,7 @@
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default"/>
                                                     </imageView>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="3CR-xe-7F7" secondAttribute="bottom" id="5wl-Wz-NEc"/>
                                                     <constraint firstItem="3CR-xe-7F7" firstAttribute="leading" secondItem="jDn-zR-hht" secondAttribute="leading" id="hyI-pk-Lmw"/>
@@ -455,12 +459,13 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="yjh-Hn-5ga"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Nge-ip-wWe" firstAttribute="top" secondItem="XC4-IM-Dvq" secondAttribute="top" id="J8x-KB-mmg"/>
                                     <constraint firstItem="Nge-ip-wWe" firstAttribute="centerX" secondItem="XC4-IM-Dvq" secondAttribute="centerX" id="X7i-LJ-Sl9"/>

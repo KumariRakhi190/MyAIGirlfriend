@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "00 - Lauchscreen.png",
-      "idiom" : "universal"
+      "filename" : "Login.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Login@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Login@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -95,12 +95,57 @@ class TabBarViewController: UIViewController {
         showOnly(chatVC)
     }
     
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        tabBarView.giveShadowAndRoundCorners(shadowOffset: .zero, shadowRadius: 10, opacity: 0.3, shadowColor: .buttonColor, cornerRadius: 0)
+//        tabBarView.layer.cornerRadius = self.tabBarView.frame.height / 2
+////        scrollView.delegate = self
+//    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tabBarView.giveShadowAndRoundCorners(shadowOffset: .zero, shadowRadius: 10, opacity: 0.3, shadowColor: .buttonColor, cornerRadius: 0)
-        tabBarView.layer.cornerRadius = self.tabBarView.frame.height / 2
-//        scrollView.delegate = self
+        
+        // Remove any background color
+        tabBarView.backgroundColor = .clear
+        
+        // Remove old blur views if any
+        tabBarView.subviews.forEach {
+            if $0 is UIVisualEffectView { $0.removeFromSuperview() }
+        }
+        
+        // 1. Glass Blur Effect (iOS 17 style)
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = tabBarView.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurView.layer.cornerRadius = tabBarView.frame.height / 2
+        blurView.layer.masksToBounds = true
+        
+        // 2. Vibrancy Layer (makes icons/text pop)
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect, style: .fill)
+        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyView.frame = blurView.bounds
+        vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurView.contentView.addSubview(vibrancyView)
+        
+        // 3. Optional Glass Border
+        blurView.layer.borderWidth = 0.8
+        blurView.layer.borderColor = UIColor.white.withAlphaComponent(0.25).cgColor
+        
+        // 4. Optional Subtle Gradient Overlay (for depth)
+        let gradient = CAGradientLayer()
+        gradient.colors = [
+            UIColor.white.withAlphaComponent(0.15).cgColor,
+            UIColor.clear.cgColor
+        ]
+        gradient.frame = blurView.bounds
+        gradient.cornerRadius = blurView.layer.cornerRadius
+        blurView.layer.insertSublayer(gradient, at: 0)
+        
+        tabBarView.insertSubview(blurView, at: 0)
     }
+
+
     
     func initialSetup(){
         chatTabControl.addTarget(self, action: #selector(didChangeTab), for: .touchUpInside)
